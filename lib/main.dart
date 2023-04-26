@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'smart_city_client',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -40,51 +40,52 @@ class _MyHomePageState extends State<MyHomePage> {
     return DefaultTabController(
       length: 5,
       child: Scaffold(
-          bottomNavigationBar: Container(
-            decoration: const BoxDecoration(color: Colors.black),
-            height: 100,
-            child: const TabBar(
-              labelStyle: TextStyle(
-                height: 0,
-                fontSize: 16,
+        bottomNavigationBar: Container(
+          decoration: const BoxDecoration(color: Colors.black),
+          height: 100,
+          child: const TabBar(
+            labelStyle: TextStyle(
+              height: 0,
+              fontSize: 16,
+            ),
+            tabs: <Widget>[
+              Tab(
+                icon: Icon(Icons.home),
+                text: ("首页"),
               ),
-              tabs: <Widget>[
-                Tab(
-                  icon: Icon(Icons.home),
-                  text: ("首页"),
-                ),
-                Tab(
-                  icon: Icon(Icons.apps),
-                  text: ("应用"),
-                ),
-                Tab(
-                  icon: Icon(Icons.location_city),
-                  text: ("智慧城市"),
-                ),
-                Tab(
-                  icon: Icon(Icons.message),
-                  text: ("聊天"),
-                ),
-                Tab(
-                  icon: Icon(Icons.person),
-                  text: ("我的"),
-                ),
-              ],
-            ),
+              Tab(
+                icon: Icon(Icons.apps),
+                text: ("应用"),
+              ),
+              Tab(
+                icon: Icon(Icons.location_city),
+                text: ("智慧城市"),
+              ),
+              Tab(
+                icon: Icon(Icons.message),
+                text: ("聊天"),
+              ),
+              Tab(
+                icon: Icon(Icons.person),
+                text: ("我的"),
+              ),
+            ],
           ),
-          body: Container(
-            padding: EdgeInsets.only(
-                top: MediaQueryData.fromWindow(window).padding.top),
-            child: const TabBarView(
-              children: <Widget>[
-                Home(),
-                Apps(),
-                SmartCity(),
-                Chat(),
-                Me(),
-              ],
-            ),
-          )),
+        ),
+        body: Container(
+          // padding: EdgeInsets.only(
+          //     top: MediaQueryData.fromWindow(window).padding.top),
+          child: const TabBarView(
+            children: <Widget>[
+              Home(),
+              Apps(),
+              SmartCity(),
+              Chat(),
+              Me(),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
