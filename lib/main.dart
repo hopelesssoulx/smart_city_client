@@ -7,8 +7,10 @@ import 'package:smart_city_client/pages/apps.dart';
 import 'package:smart_city_client/pages/chat.dart';
 import 'package:smart_city_client/pages/me.dart';
 import 'package:smart_city_client/pages/smart_City.dart';
+import 'package:smart_city_client/utils/token.dart';
 
-void main() {
+Future<void> main() async {
+  await Token.init();
   runApp(const MyApp());
 }
 
