@@ -1,8 +1,6 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_city_client/api/user.dart';
-import 'package:smart_city_client/utils/request.dart';
 import 'package:smart_city_client/utils/token.dart';
 
 class Me extends StatefulWidget {

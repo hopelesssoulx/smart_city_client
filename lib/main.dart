@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:smart_city_client/components/blank_page.dart';
 import 'package:smart_city_client/pages/Home.dart';
 import 'package:smart_city_client/pages/apps.dart';
 import 'package:smart_city_client/pages/chat.dart';

@@ -1,11 +1,6 @@
-import 'dart:convert';
-import 'dart:math';
-
 import 'package:card_swiper/card_swiper.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class Carousel extends StatefulWidget {
   const Carousel({super.key});
@@ -15,10 +10,7 @@ class Carousel extends StatefulWidget {
 }
 
 class _CarouselState extends State<Carousel> {
-  var images = [
-    // 'http://127.0.0.1:3001/api/carousel/getPage/2',
-    // 'http://127.0.0.1:3001/api/carousel/getPage/3',
-  ];
+  var images = [];
 
   @override
   void initState() {
@@ -43,14 +35,14 @@ class _CarouselState extends State<Carousel> {
         },
         itemCount: images.length,
         // pagination: SwiperPagination(),
-        control: SwiperControl(),
+        control: const SwiperControl(),
         autoplay: true,
       ),
     );
   }
 
   getImages() async {
-    var response = await new Dio().get(
+    var response = await Dio().get(
       'http://192.168.137.1:3001/api/carousel/getCarouselImages',
     );
 
