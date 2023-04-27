@@ -1,6 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_city_client/api/carousel.dart';
 
 class Carousel extends StatefulWidget {
   const Carousel({super.key});
@@ -24,10 +24,6 @@ class _CarouselState extends State<Carousel> {
       height: 200,
       child: Swiper(
         itemBuilder: (BuildContext context, int index) {
-          // return Image.memory(
-          //   base64Decode(images[index]),
-          //   fit: BoxFit.fill,
-          // );
           return Image.network(
             images[index],
             fit: BoxFit.fill,
@@ -42,15 +38,12 @@ class _CarouselState extends State<Carousel> {
   }
 
   getImages() async {
-    var response = await Dio().get(
-      'http://192.168.137.1:3001/api/carousel/getCarouselImages',
-    );
-
-    setState(() {
-      for (var i in response.data['data']) {
-        images.add(
-            'http://192.168.137.1:3001/api/carousel/getImages/' + i['image']);
-      }
-    });
+    getCarouselAddress().then((r) => {
+          setState(() {
+            for (var i in r.data['data']) {
+              images.add(getCarouselImageBaseUrl() + i['image']);
+            }
+          })
+        });
   }
 }
