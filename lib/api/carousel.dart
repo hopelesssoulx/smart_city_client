@@ -1,7 +1,7 @@
 import '../utils/request.dart';
 
 getCarouselAddress() {
-  return Request().dio.get('/carousel/getCarouselImages');
+  return Request().rq.get('/carousel/getCarouselImages');
 }
 
 getCarouselImageBaseUrl() {
