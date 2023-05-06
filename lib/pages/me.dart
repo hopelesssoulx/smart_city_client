@@ -10,7 +10,7 @@ class Me extends StatefulWidget {
   State<Me> createState() => _MeState();
 }
 
-class _MeState extends State<Me> {
+class _MeState extends State<Me> with AutomaticKeepAliveClientMixin {
   String username = '';
   String password = '';
 
@@ -18,6 +18,9 @@ class _MeState extends State<Me> {
   void initState() {
     super.initState();
   }
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
