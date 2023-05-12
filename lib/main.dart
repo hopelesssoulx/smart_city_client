@@ -6,6 +6,7 @@ import 'package:smart_city_client/pages/apps.dart';
 import 'package:smart_city_client/pages/chat.dart';
 import 'package:smart_city_client/pages/me.dart';
 import 'package:smart_city_client/pages/smart_City.dart';
+import 'package:smart_city_client/utils/router.dart';
 import 'package:smart_city_client/utils/token.dart';
 
 Future<void> main() async {
@@ -18,12 +19,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    RouteManager router = RouteManager();
+
     return MaterialApp(
       title: 'smart_city_client',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(),
+      initialRoute: '/',
+      onGenerateRoute: (setting) {
+        return router.routeWithSetting(setting);
+      },
+      onUnknownRoute: (setting) {
+        return router.unknowRouteWithSetting(setting);
+      },
     );
   }
 }
