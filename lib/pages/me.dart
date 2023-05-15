@@ -1,6 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:smart_city_client/api/user.dart';
 import 'package:smart_city_client/utils/token.dart';
 
 class Me extends StatefulWidget {
@@ -11,12 +12,13 @@ class Me extends StatefulWidget {
 }
 
 class _MeState extends State<Me> with AutomaticKeepAliveClientMixin {
-  String username = '';
-  String password = '';
+  var username = '未登录';
+  var uid = 'null';
 
   @override
   void initState() {
     super.initState();
+    init();
   }
 
   @override
@@ -25,47 +27,81 @@ class _MeState extends State<Me> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 200),
+      margin:
+          EdgeInsets.only(top: MediaQueryData.fromWindow(window).padding.top),
       child: Column(
         children: [
-          TextField(
-            onChanged: (value) => {username = value},
+          Container(
+              alignment: Alignment.center,
+              height: 100,
+              child: Material(
+                elevation: 5,
+                shadowColor: Colors.grey[50],
+                child: ListTile(
+                  leading: const SizedBox(
+                      height: 80.0,
+                      width: 80.0,
+                      child: CircleAvatar(
+                        backgroundImage: AssetImage(
+                            'assets/images/default_user_avatar.webp'),
+                      )),
+                  title: Text(username),
+                  subtitle: Text(
+                    'uid: ' + uid,
+                    style: const TextStyle(color: Colors.grey),
+                  ),
+                  shape: const RoundedRectangleBorder(
+                      side: BorderSide(color: Colors.transparent)),
+                  onTap: () => {tap(0)},
+                ),
+              )),
+          ListTile(
+            leading: const Icon(Icons.person),
+            title: const Text('个人信息'),
+            trailing: const Icon(Icons.keyboard_arrow_right),
+            onTap: () => {tap(1)},
           ),
-          Padding(padding: EdgeInsets.only(bottom: 40)),
-          TextField(
-            onChanged: (value) => {password = value},
+          ListTile(
+            leading: const Icon(Icons.logout),
+            title: const Text('退出登录'),
+            trailing: const Icon(Icons.keyboard_arrow_right),
+            onTap: () => {tap(2)},
           ),
-          Padding(padding: EdgeInsets.only(bottom: 40)),
-          ElevatedButton(onPressed: sendRequest, child: Text('login')),
-          ElevatedButton(onPressed: show, child: Text('show')),
         ],
       ),
     );
   }
 
-  show() {
-    debugPrint(Token.getToken());
-    debugPrint(Token.getUsername());
+  tap(event) {
+    switch (event) {
+      case 0:
+        if (Token.getToken() == null) {
+          Navigator.pushNamed(context, '/me/login').then((_) {
+            setState(() {
+              username = Token.getUsername()!;
+              uid = Token.getUID()!;
+            });
+          });
+        }
+        break;
+      case 1:
+        print('个人信息');
+        break;
+      case 2:
+        Token.rmAll();
+        setState(() {
+          username = '未登录';
+          uid = 'null';
+        });
+        Fluttertoast.showToast(msg: '已退出登录');
+        break;
+    }
   }
 
-  sendRequest() {
-    login(
-      username,
-      password,
-    ).then(
-      (r) => {
-        // print(r.data),
-        if (r.data['code'] == 200)
-          {
-            Token.setToken(r.data['token']),
-            Token.setUsername(r.data['username']),
-            Fluttertoast.showToast(msg: r.data['msg']),
-          }
-        else
-          {
-            Fluttertoast.showToast(msg: r.data['msg']),
-          }
-      },
-    );
+  void init() {
+    if (Token.getToken() != null) {
+      username = Token.getUsername()!;
+      uid = Token.getUID()!;
+    }
   }
 }
