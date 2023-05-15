@@ -25,6 +25,14 @@ class Token {
     return 'ok';
   }
 
+  static void setToken(String token) {
+    prefs.setString('token', token);
+  }
+
+  static String? getToken() {
+    return prefs.getString(token);
+  }
+
   static void setUsername(String username) {
     prefs.setString('username', username);
   }
@@ -33,11 +41,23 @@ class Token {
     return prefs.getString(username);
   }
 
-  static void setToken(String token) {
-    prefs.setString('token', token);
+  static void setUID(String uid) {
+    prefs.setString('uid', uid);
   }
 
-  static String? getToken() {
-    return prefs.getString(token);
+  static String? getUID() {
+    return prefs.getString('uid');
+  }
+
+  static void rmAll() {
+    prefs.remove('token');
+    prefs.remove('username');
+    prefs.remove('uid');
+  }
+
+  static void setAll(data) {
+    prefs.setString('token', data['token']);
+    prefs.setString('username', data['username']);
+    prefs.setString('uid', data['id'].toString());
   }
 }
