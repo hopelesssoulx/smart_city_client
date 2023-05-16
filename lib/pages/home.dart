@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_city_client/pages/home/carousel.dart';
+import 'package:smart_city_client/pages/home/news_list.dart';
 import 'package:smart_city_client/pages/home/search.dart';
 
 class Home extends StatefulWidget {
@@ -17,6 +18,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
         Text('home.dart'),
         Search(),
         Carousel(),
+        NewsList(),
       ],
     );
   }
