@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:smart_city_client/pages/home/news_detail.dart';
 import 'package:smart_city_client/pages/me/login.dart';
 import 'package:smart_city_client/pages/me/register.dart';
+import 'package:smart_city_client/pages/me/update_pwd.dart';
+import 'package:smart_city_client/pages/me/userinfo.dart';
 
 class RouteManager {
   // 路由总表
@@ -38,6 +40,8 @@ class RouteManager {
     return {
       "/me/login": (BuildContext context) => const Login(),
       "/me/register": (BuildContext context) => const Register(),
+      "/me/userInfo": (BuildContext context) => const UserInfo(),
+      "/me/updatePwd": (BuildContext context) => const UpdatePwd(),
     };
   }
 }

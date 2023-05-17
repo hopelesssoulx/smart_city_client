@@ -62,6 +62,12 @@ class _MeState extends State<Me> with AutomaticKeepAliveClientMixin {
             onTap: () => {tap(1)},
           ),
           ListTile(
+            leading: const Icon(Icons.update),
+            title: const Text('修改密码'),
+            trailing: const Icon(Icons.keyboard_arrow_right),
+            onTap: () => {tap(3)},
+          ),
+          ListTile(
             leading: const Icon(Icons.logout),
             title: const Text('退出登录'),
             trailing: const Icon(Icons.keyboard_arrow_right),
@@ -85,7 +91,10 @@ class _MeState extends State<Me> with AutomaticKeepAliveClientMixin {
         }
         break;
       case 1:
-        print('个人信息');
+        Navigator.pushNamed(context, '/me/userInfo');
+        break;
+      case 3:
+        Navigator.pushNamed(context, '/me/updatePwd');
         break;
       case 2:
         Token.rmAll();
@@ -93,7 +102,7 @@ class _MeState extends State<Me> with AutomaticKeepAliveClientMixin {
           username = '未登录';
           uid = 'null';
         });
-        Fluttertoast.showToast(msg: '已退出登录');
+        Fluttertoast.showToast(msg: '已退出登录', gravity: ToastGravity.CENTER);
         break;
     }
   }
