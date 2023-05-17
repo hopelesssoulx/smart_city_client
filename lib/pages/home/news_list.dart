@@ -25,6 +25,14 @@ class _NewsListState extends State<NewsList> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Container(
+          height: 40,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            // children: [for (int i = 0; i < 10; i++) _cate(i)],
+            children: [for (int k in newsCate.keys) _cate(k)],
+          ),
+        ),
         for (int index = 0; index < newsData.length; index++) _newsView(index)
       ],
     );
@@ -112,6 +120,24 @@ class _NewsListState extends State<NewsList> {
         ),
       ),
     );
+  }
+
+  Widget _cate(index) {
+    return TextButton(
+      onPressed: () => {changeCate(index)},
+      child: Text(
+        newsCate[index]!,
+        style: TextStyle(color: Colors.grey),
+      ),
+    );
+  }
+
+  changeCate(index) {
+    getNewsList(type: index).then((r) => {
+          setState(() {
+            newsData = r.data['data'];
+          }),
+        });
   }
 
   init() {

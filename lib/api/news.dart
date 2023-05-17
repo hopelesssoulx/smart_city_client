@@ -6,8 +6,14 @@ getNewsCategory() {
 }
 
 // 获取新闻列表
-getNewsList() {
-  return Request().rq.get('/news/getNewsList?type=20');
+getNewsList({title, type}) {
+  if (title != null) {
+    return Request().rq.get('/news/getNewsList?title=$title');
+  }
+  if (type != null) {
+    return Request().rq.get('/news/getNewsList?type=$type');
+  }
+  return Request().rq.get('/news/getNewsList');
 }
 
 // 获取新闻详情
