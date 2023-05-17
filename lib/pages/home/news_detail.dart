@@ -26,14 +26,24 @@ class _NewsDetailState extends State<NewsDetail> {
     // final param = ModalRoute.of(context)!.settings.arguments as int;
 
     return Scaffold(
+      appBar: AppBar(),
       body: ListView(
+        padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
         children: [
-          Image.memory(base64Decode(newsData['cover'] != null
-              ? newsData['cover'].split(',')[1]
-              : 'R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')),
-          Text(newsData['title'] ?? ''),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.memory(base64Decode(newsData['cover'] != null
+                ? newsData['cover'].split(',')[1]
+                : 'R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')),
+          ),
+          ListTile(
+            title: Text(newsData['title'] ?? ''),
+            subtitle: Container(
+              alignment: Alignment.bottomRight,
+              child: Text((newsData['pub_date'] ?? '')),
+            ),
+          ),
           HtmlWidget(newsData['content'] ?? ''),
-          Text(newsData['pub_date'] ?? ''),
         ],
       ),
     );
