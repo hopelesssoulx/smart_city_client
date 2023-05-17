@@ -35,7 +35,22 @@ class _NewsListState extends State<NewsList> {
 
     return GestureDetector(
       onTap: () {
-        print(newsData[index]['id']);
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) {
+        //       return const NewsDetail();
+        //     },
+        //     settings: RouteSettings(
+        //         arguments: newsData[index]['id'],
+        //         ),
+        //   ),
+        // );
+        Navigator.pushNamed(
+          context,
+          '/home/newsDetail',
+          arguments: newsData[index]['id'],
+        );
       },
       child: Card(
         child: Row(
