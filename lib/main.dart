@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:smart_city_client/components/error_page.dart';
 import 'package:smart_city_client/pages/Home.dart';
 import 'package:smart_city_client/pages/apps.dart';
 import 'package:smart_city_client/pages/chat.dart';
@@ -33,6 +34,12 @@ class MyApp extends StatelessWidget {
       },
       onUnknownRoute: (setting) {
         return router.unknowRouteWithSetting(setting);
+      },
+      builder: (context, widget) {
+        ErrorWidget.builder = (FlutterErrorDetails e) {
+          return ErrorPage(errorDetails: e);
+        };
+        return widget!;
       },
     );
   }
