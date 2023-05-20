@@ -28,3 +28,13 @@ updateUserPwd(oldPwd, newPwd) {
     "newPassword": newPwd,
   });
 }
+
+// 获取用户头像
+getAvatar() {
+  return ('http://192.168.137.1:3001/api/user/getAvatar/');
+}
+
+// 上传用户头像
+updateAvatar(data) {
+  return Request().rq.post('/user/uploadAvatar', data: data);
+}

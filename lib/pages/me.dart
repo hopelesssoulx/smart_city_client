@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:smart_city_client/api/user.dart';
 import 'package:smart_city_client/utils/token.dart';
 
 class Me extends StatefulWidget {
@@ -14,6 +15,7 @@ class Me extends StatefulWidget {
 class _MeState extends State<Me> with AutomaticKeepAliveClientMixin {
   var username = '未登录';
   var uid = 'null';
+  var avatar = '';
 
   @override
   void initState() {
@@ -38,13 +40,16 @@ class _MeState extends State<Me> with AutomaticKeepAliveClientMixin {
                 elevation: 5,
                 shadowColor: Colors.grey[50],
                 child: ListTile(
-                  leading: const SizedBox(
-                      height: 80.0,
-                      width: 80.0,
-                      child: CircleAvatar(
-                        backgroundImage: AssetImage(
-                            'assets/images/default_user_avatar.webp'),
-                      )),
+                  leading: SizedBox(
+                    width: 56,
+                    height: 56,
+                    child: CircleAvatar(
+                      backgroundImage: const AssetImage(
+                          'assets/images/default_user_avatar.webp'),
+                      backgroundColor: Colors.white,
+                      foregroundImage: NetworkImage(avatar),
+                    ),
+                  ),
                   title: Text(username),
                   subtitle: Text(
                     'uid: ' + uid,
@@ -83,15 +88,14 @@ class _MeState extends State<Me> with AutomaticKeepAliveClientMixin {
       case 0:
         if (Token.getToken() == null) {
           Navigator.pushNamed(context, '/me/login').then((_) {
-            setState(() {
-              username = Token.getUsername()!;
-              uid = Token.getUID()!;
-            });
+            refresh();
           });
         }
         break;
       case 1:
-        Navigator.pushNamed(context, '/me/userInfo');
+        Navigator.pushNamed(context, '/me/userInfo').then((_) {
+          refresh();
+        });
         break;
       case 3:
         Navigator.pushNamed(context, '/me/updatePwd');
@@ -101,16 +105,24 @@ class _MeState extends State<Me> with AutomaticKeepAliveClientMixin {
         setState(() {
           username = '未登录';
           uid = 'null';
+          avatar = '';
         });
         Fluttertoast.showToast(msg: '已退出登录', gravity: ToastGravity.CENTER);
         break;
     }
   }
 
-  void init() {
-    if (Token.getToken() != null) {
+  refresh() {
+    setState(() {
       username = Token.getUsername()!;
       uid = Token.getUID()!;
+      avatar = getAvatar() + Token.getAvatar()!;
+    });
+  }
+
+  init() {
+    if (Token.getToken() != null) {
+      refresh();
     }
   }
 }

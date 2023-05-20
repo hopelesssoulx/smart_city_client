@@ -49,15 +49,25 @@ class Token {
     return prefs.getString('uid');
   }
 
+  static void setAvatar(String avatar) {
+    prefs.setString('avatar', avatar);
+  }
+
+  static String? getAvatar() {
+    return prefs.getString('avatar');
+  }
+
   static void rmAll() {
     prefs.remove('token');
     prefs.remove('username');
     prefs.remove('uid');
+    prefs.remove('avatar');
   }
 
   static void setAll(data) {
     prefs.setString('token', data['token']);
     prefs.setString('username', data['username']);
     prefs.setString('uid', data['id'].toString());
+    prefs.setString('avatar', data['avatar'] ?? '');
   }
 }

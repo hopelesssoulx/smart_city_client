@@ -40,6 +40,7 @@ dependencies:
   fluttertoast: ^8.2.1
   flutter_client_sse: ^1.0.0
   flutter_widget_from_html: ^0.10.0
+  image_picker: ^0.8.7+5
 
 dev_dependencies:
   flutter_test:
