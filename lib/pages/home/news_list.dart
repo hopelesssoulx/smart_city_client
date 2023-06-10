@@ -141,7 +141,7 @@ class _NewsListState extends State<NewsList> {
   }
 
   init() {
-    getNewsList().then((r) => {
+    getNewsList(type: 19).then((r) => {
           setState(() {
             newsData = r.data['data'];
           }),

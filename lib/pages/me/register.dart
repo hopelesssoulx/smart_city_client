@@ -20,17 +20,41 @@ class _RegisterState extends State<Register> {
         title: const Text('注册'),
       ),
       body: Container(
+        padding: const EdgeInsets.fromLTRB(30, 100, 30, 0),
         child: Column(
           children: [
-            TextField(
-              controller: usernameCtrl,
-              decoration: const InputDecoration(hintText: '账号'),
+            ListTile(
+              leading: const Icon(Icons.alternate_email),
+              title: TextField(
+                controller: usernameCtrl,
+                decoration: const InputDecoration(hintText: '账号'),
+              ),
             ),
-            TextField(
-              controller: passwordCtrl,
-              decoration: const InputDecoration(hintText: '密码'),
+            ListTile(
+              leading: const Icon(Icons.lock),
+              title: TextField(
+                controller: passwordCtrl,
+                decoration: const InputDecoration(hintText: '密码'),
+                obscureText: true,
+                enableSuggestions: false,
+                autocorrect: false,
+              ),
             ),
-            ElevatedButton(onPressed: registerButton, child: const Text('注册'))
+            const Padding(padding: EdgeInsets.only(top: 10)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: registerButton,
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12), // <-- Radius
+                    ),
+                  ),
+                  child: const Text('注册'),
+                ),
+              ],
+            )
           ],
         ),
       ),

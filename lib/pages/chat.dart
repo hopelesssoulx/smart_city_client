@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_client_sse/flutter_client_sse.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_city_client/api/chat.dart';
 import 'package:smart_city_client/utils/token.dart';
 
@@ -22,7 +23,11 @@ class _ChatState extends State<Chat> with AutomaticKeepAliveClientMixin {
   void initState() {
     super.initState();
 
-    initChat();
+    if (Token.getToken() != null) {
+      initChat();
+    } else {
+      Fluttertoast.showToast(msg: '未登录', gravity: ToastGravity.CENTER);
+    }
   }
 
   @override
@@ -97,10 +102,24 @@ class _ChatState extends State<Chat> with AutomaticKeepAliveClientMixin {
   }
 
   post() {
-    if (postMsg != '') {
+    if (postMsg == 'rs' && Token.getToken() != null) {
+      SSEClient.unsubscribeFromSSE();
+      initChat();
+      postController.clear();
+      postMsg = '';
+      return;
+    }
+
+    if (sseClient != null && Token.getToken() != null && postMsg != '') {
       postChat(postMsg);
       postController.clear();
       postMsg = '';
+    } else {
+      if (sseClient == null && Token.getToken() != null) {
+        initChat();
+      } else {
+        Fluttertoast.showToast(msg: '未登录', gravity: ToastGravity.CENTER);
+      }
     }
   }
 }

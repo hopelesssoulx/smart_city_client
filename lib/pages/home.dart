@@ -15,7 +15,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   Widget build(BuildContext context) {
     return ListView(
       children: const [
-        Text('home.dart'),
+        // Text('home.dart'),
         Search(),
         Carousel(),
         NewsList(),

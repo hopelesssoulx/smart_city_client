@@ -56,11 +56,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 5,
+      length: 3,
       child: Scaffold(
         bottomNavigationBar: Container(
           decoration: const BoxDecoration(color: Colors.black),
-          height: 100,
+          height: 60,
           child: const TabBar(
             labelStyle: TextStyle(
               height: 0,
@@ -69,23 +69,23 @@ class _MyHomePageState extends State<MyHomePage> {
             tabs: <Widget>[
               Tab(
                 icon: Icon(Icons.home),
-                text: ("首页"),
+                // text: ("首页"),
               ),
-              Tab(
-                icon: Icon(Icons.apps),
-                text: ("应用"),
-              ),
-              Tab(
-                icon: Icon(Icons.location_city),
-                text: ("智慧城市"),
-              ),
+              // Tab(
+              //   icon: Icon(Icons.apps),
+              //   text: ("应用"),
+              // ),
+              // Tab(
+              //   icon: Icon(Icons.location_city),
+              //   text: ("智慧城市"),
+              // ),
               Tab(
                 icon: Icon(Icons.message),
-                text: ("聊天"),
+                // text: ("聊天"),
               ),
               Tab(
                 icon: Icon(Icons.person),
-                text: ("我的"),
+                // text: ("我的"),
               ),
             ],
           ),
@@ -96,8 +96,8 @@ class _MyHomePageState extends State<MyHomePage> {
           child: const TabBarView(
             children: <Widget>[
               Home(),
-              Apps(),
-              SmartCity(),
+              // Apps(),
+              // SmartCity(),
               Chat(),
               Me(),
             ],

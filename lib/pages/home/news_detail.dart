@@ -43,7 +43,9 @@ class _NewsDetailState extends State<NewsDetail> {
               child: Text((newsData['pub_date'] ?? '')),
             ),
           ),
+          Padding(padding: EdgeInsets.only(bottom: 10)),
           HtmlWidget(newsData['content'] ?? ''),
+          Padding(padding: EdgeInsets.only(bottom: 20)),
         ],
       ),
     );
